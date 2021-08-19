@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -48,6 +49,7 @@ public class FrameWork {
 		capablity.setBrowserName("chrome");
 		System.setProperty("webdriver.chrome.driver", "/Users/Jessy/SeleniumDrivers/chromedriver");
 		driver = new ChromeDriver(options);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		//strTestcaseName=strTestcaseName+"_"+UUID.randomUUID().toString();
 		driver.get(strbaseUrl);
 		driver.manage().window().maximize();
@@ -265,8 +267,8 @@ public class FrameWork {
 	}
 	
 	public void VerifyText(String strFirstString, String strSecondString, String strValidation) {
-		if(strFirstString.toUpperCase().trim()==strSecondString.toUpperCase().trim()) {
-			if(strFirstString.trim()==strSecondString.trim()) {
+		if(strFirstString.toUpperCase().trim().equals(strSecondString.toUpperCase().trim())) {
+			if(strFirstString.trim().equals(strSecondString.trim())) {
 				LOGGER.log(Level.INFO,strValidation+" :"+strFirstString+" : "+strSecondString+" is Matching");
 
 			}
